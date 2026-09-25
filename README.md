@@ -109,7 +109,7 @@ A client-side mod for Minecraft **Fabric**. Every time you join a world (singlep
 | 100–999 | A centenarian, still going strong! Welcome to Minecraft! | Play freely |
 | 1000–99999 | A thousand-year-old spirit appears! The land trembles before you! | Play freely |
 | 100000–999999 | A hundred thousand years?! Are you a living fossil? | Play freely |
-| **66000000** | **Go play, Mr. Tyrannosaurus Rex!** | Play freely |
+| 66000000 | Go play, Mr. Tyrannosaurus Rex! | Play freely |
 | 4600000000 | You were there when Earth was born? Hello, Mother Earth! | Play freely |
 | 13800000000 | Mr. Big Bang, welcome to Minecraft! | Play freely |
 | Even larger | Older than the universe?! The Time Bureau needs you! | Play freely |
