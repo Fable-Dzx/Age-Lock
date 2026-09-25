@@ -32,7 +32,43 @@ jobs:
           name: age-lock-jars
           path: build/libs/*.jar
 
-  release:
+  # 每次推送到 main 自动发布滚动 Release（无需手动打标签）
+  publish-continuous:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: age-lock-jars
+          path: artifacts
+
+      - name: Publish continuous release
+        run: |
+          VERSION=$(grep '^mod_version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
+          SHA=${GITHUB_SHA:0:7}
+          gh release delete continuous --yes --cleanup-tag 2>/dev/null || true
+          gh release create continuous artifacts/*.jar \
+            --title "Age Lock v${VERSION} · continuous" \
+            --notes "自动构建自 main@${SHA}，每次推送自动更新。
+        Automatically built from main@${SHA}; this rolling release is updated on every push to main. Stable releases: use version tags (v1.0.0, v1.1.0, ...)."
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Print release URL
+        run: |
+          gh release view continuous --json url -q '.url' | tee release_url.txt
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  # 推送 v* 版本标签时发布稳定版 Release
+  publish-tag:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
     runs-on: ubuntu-latest
@@ -48,7 +84,7 @@ jobs:
           name: age-lock-jars
           path: artifacts
 
-      - name: Publish GitHub Release
+      - name: Publish tagged release
         uses: softprops/action-gh-release@v2
         with:
           files: artifacts/*.jar
