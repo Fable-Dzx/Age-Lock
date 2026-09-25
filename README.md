@@ -25,6 +25,7 @@
 - **Steam 风格彩蛋**：输入超大年龄会触发各种搞笑提示；
 - **验证弹窗**：输入年龄后先弹出结果框，点击「好的」才正式进入正常游玩；
 - **可配置**：锁定时长、开关均可通过配置文件调整；
+- **多语言支持**：内置简体中文 / English，全部文案来自语言 JSON 文件，新增语言只需添加一个文件；
 - **纯客户端**：不影响服务端，单机 / 局域网 / 联机服务器通用。
 
 ### 年龄区间彩蛋
@@ -96,6 +97,7 @@ A client-side mod for Minecraft **Fabric**. Every time you join a world (singlep
 - **Steam-style easter eggs** — absurd ages trigger funny messages;
 - **Result popup** — after entering an age, a result dialog appears; click **“OK”** to actually start playing;
 - **Configurable** — lock duration and an on/off switch via a config file;
+- **i18n** — Simplified Chinese and English built in; all text comes from lang JSON files, so adding a language is just dropping in one more file;
 - **Client-only** — works in singleplayer, LAN and on online servers without touching the server.
 
 ### Age Range Easter Eggs

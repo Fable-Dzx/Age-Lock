@@ -141,10 +141,10 @@ public final class AgeManager {
                 int remaining = lockSeconds - playTicks / 20;
                 if (remaining == 60 && !warned60) {
                     warned60 = true;
-                    client.inGameHud.setOverlayMessage(Text.literal("距离锁定还有 1 分钟！"), true);
+                    client.inGameHud.setOverlayMessage(Text.translatable("agelock.warn.minute"), true);
                 } else if (remaining == 10 && !warned10) {
                     warned10 = true;
-                    client.inGameHud.setOverlayMessage(Text.literal("还有 10 秒就要锁定啦！"), true);
+                    client.inGameHud.setOverlayMessage(Text.translatable("agelock.warn.ten_seconds"), true);
                 }
                 if (playTicks >= lockSeconds * 20) {
                     mode = Mode.LOCKED;

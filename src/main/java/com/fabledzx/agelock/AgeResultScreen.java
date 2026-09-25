@@ -7,15 +7,16 @@ import net.minecraft.text.Text;
 
 /**
  * 验证结果弹窗：展示年龄区间的提示语（含彩蛋），点击「好的」后正常游玩。
+ * 提示语通过翻译键引用，自动适配游戏语言。
  */
 public class AgeResultScreen extends Screen {
 
-    private final String message;
+    private final String messageKey;
     private final boolean locked;
 
-    public AgeResultScreen(String message, boolean locked) {
-        super(Text.literal("验证结果"));
-        this.message = message;
+    public AgeResultScreen(String messageKey, boolean locked) {
+        super(Text.translatable("agelock.screen.result.title"));
+        this.messageKey = messageKey;
         this.locked = locked;
     }
 
@@ -23,7 +24,8 @@ public class AgeResultScreen extends Screen {
     protected void init() {
         super.init();
         int cx = this.width / 2;
-        this.addDrawableChild(new ButtonWidget(cx - 60, this.height / 2 + 40, 120, 20, Text.literal("好的"), b -> {
+        this.addDrawableChild(new ButtonWidget(cx - 60, this.height / 2 + 40, 120, 20,
+                Text.translatable("agelock.screen.result.ok"), b -> {
             AgeManager.getInstance().confirm();
             this.close();
         }));
@@ -33,10 +35,10 @@ public class AgeResultScreen extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         int cy = this.height / 2;
-        drawCentered(matrices, Text.literal("验证通过！"), cy - 70, 0x55FF55);
-        drawCentered(matrices, Text.literal(this.message), cy - 30, 0xFFFFFF);
+        drawCentered(matrices, Text.translatable("agelock.screen.result.passed"), cy - 70, 0x55FF55);
+        drawCentered(matrices, Text.translatable(this.messageKey), cy - 30, 0xFFFFFF);
         if (this.locked) {
-            drawCentered(matrices, Text.literal("温馨提示：你只能玩 5 分钟哦~"), cy + 10, 0xFFAA00);
+            drawCentered(matrices, Text.translatable("agelock.screen.result.hint_locked"), cy + 10, 0xFFAA00);
         }
         super.render(matrices, mouseX, mouseY, delta);
     }
@@ -55,7 +57,7 @@ public class AgeResultScreen extends Screen {
     @Override
     public void close() {
         if (this.client != null && this.client.world != null && AgeManager.getInstance().canForceScreen()) {
-            this.client.setScreen(new AgeResultScreen(this.message, this.locked));
+            this.client.setScreen(new AgeResultScreen(this.messageKey, this.locked));
         } else {
             super.close();
         }

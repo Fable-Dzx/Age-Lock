@@ -7,18 +7,20 @@ import net.minecraft.text.Text;
 
 /**
  * 锁定界面：未满 18 岁游玩 5 分钟后弹出，只能点击「我长大了」重新验证年龄。
+ * 文案使用翻译键，自动适配游戏语言。
  */
 public class AgeLockScreen extends Screen {
 
     public AgeLockScreen() {
-        super(Text.literal("游戏已锁定"));
+        super(Text.translatable("agelock.screen.lock.title"));
     }
 
     @Override
     protected void init() {
         super.init();
         int cx = this.width / 2;
-        this.addDrawableChild(new ButtonWidget(cx - 60, this.height / 2 + 40, 120, 20, Text.literal("我长大了"), b -> {
+        this.addDrawableChild(new ButtonWidget(cx - 60, this.height / 2 + 40, 120, 20,
+                Text.translatable("agelock.screen.lock.button"), b -> {
             AgeManager.getInstance().onGrowUp();
             this.client.setScreen(new AgeInputScreen());
         }));
@@ -28,9 +30,9 @@ public class AgeLockScreen extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         int cy = this.height / 2;
-        drawCentered(matrices, Text.literal("游玩时间已到！"), cy - 70, 0xFF5555);
-        drawCentered(matrices, Text.literal("未满 18 岁只能玩 5 分钟哦~"), cy - 40, 0xFFFFFF);
-        drawCentered(matrices, Text.literal("想继续玩？点击下方按钮重新验证年龄"), cy - 15, 0xAAAAAA);
+        drawCentered(matrices, Text.translatable("agelock.screen.lock.time_up"), cy - 70, 0xFF5555);
+        drawCentered(matrices, Text.translatable("agelock.screen.lock.hint"), cy - 40, 0xFFFFFF);
+        drawCentered(matrices, Text.translatable("agelock.screen.lock.reverify"), cy - 15, 0xAAAAAA);
         super.render(matrices, mouseX, mouseY, delta);
     }
 
