@@ -8,6 +8,7 @@
     "Doubao"
   ],
   "license": "MIT",
+  "icon": "assets/age-lock/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
