@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "age-lock",
+  "version": "${version}",
+  "name": "Age Lock",
+  "description": "每次进入游戏强制进行年龄验证：未满 18 岁只能玩 5 分钟，到点游戏锁定，点击「我长大了」重新验证；输入超大年龄会触发彩蛋（如「玩去吧，霸王龙先生！」）。",
+  "authors": [
+    "Doubao"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.fabledzx.agelock.AgeLockClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric-api": "*",
+    "minecraft": "~1.19.2",
+    "java": ">=17"
+  }
+}
