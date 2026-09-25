@@ -2,10 +2,7 @@ name: Build & Release
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -19,7 +16,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: '17'
 
       - name: Build with Gradle
         run: |
@@ -32,9 +29,7 @@ jobs:
           name: age-lock-jars
           path: build/libs/*.jar
 
-  # 每次推送到 main 自动发布滚动 Release（无需手动打标签）
-  publish-continuous:
-    if: github.ref == 'refs/heads/main'
+  release:
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -49,36 +44,15 @@ jobs:
           name: age-lock-jars
           path: artifacts
 
-      - name: Publish continuous release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          VERSION=$(grep '^mod_version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
-          SHA=${GITHUB_SHA:0:7}
-          gh release delete continuous --yes --cleanup-tag 2>/dev/null || true
-          gh release create continuous artifacts/*.jar \
-            --title "Age Lock v${VERSION} - continuous" \
-            --notes "Auto build from main@${SHA}. This rolling release is updated on every push to main; use version tags (v1.0.0, v1.1.0, ...) for stable releases."
-
-  # 推送 v* 版本标签时发布稳定版 Release
-  publish-tag:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: age-lock-jars
-          path: artifacts
-
-      - name: Publish tagged release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Age Lock v1.0.${{ github.run_number }}
+          body: |
+            自动构建版（来自 commit ${{ github.sha }}）
+            Auto-built from commit ${{ github.sha }}
           files: artifacts/*.jar
-          generate_release_notes: true
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
