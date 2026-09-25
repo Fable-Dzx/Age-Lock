@@ -50,22 +50,15 @@ jobs:
           path: artifacts
 
       - name: Publish continuous release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           VERSION=$(grep '^mod_version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
           SHA=${GITHUB_SHA:0:7}
           gh release delete continuous --yes --cleanup-tag 2>/dev/null || true
           gh release create continuous artifacts/*.jar \
-            --title "Age Lock v${VERSION} · continuous" \
-            --notes "自动构建自 main@${SHA}，每次推送自动更新。
-        Automatically built from main@${SHA}; this rolling release is updated on every push to main. Stable releases: use version tags (v1.0.0, v1.1.0, ...)."
-        env:
-          GH_TOKEN: ${{ github.token }}
-
-      - name: Print release URL
-        run: |
-          gh release view continuous --json url -q '.url' | tee release_url.txt
-        env:
-          GH_TOKEN: ${{ github.token }}
+            --title "Age Lock v${VERSION} - continuous" \
+            --notes "Auto build from main@${SHA}. This rolling release is updated on every push to main; use version tags (v1.0.0, v1.1.0, ...) for stable releases."
 
   # 推送 v* 版本标签时发布稳定版 Release
   publish-tag:
