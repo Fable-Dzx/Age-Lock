@@ -48,7 +48,7 @@
 ### 安装
 
 1. 安装 **Fabric Loader**（与你的 Minecraft 版本对应）：<https://fabricmc.net/use/>
-2. 将 `age-lock-1.0.0.jar` 放入 `.minecraft/mods/` 文件夹；
+2. 将 `age-lock-1.0.1.jar` 放入 `.minecraft/mods/` 文件夹；
 3. 同时放入与游戏版本匹配的 **Fabric API**：<https://modrinth.com/mod/fabric-api>
 4. 启动游戏即可，进入世界后会自动弹出年龄验证。
 
@@ -69,7 +69,7 @@ enabled=true
 
 ```bash
 gradle build
-# 产物：build/libs/age-lock-1.0.0.jar
+# 产物：build/libs/age-lock-1.0.1.jar
 ```
 
 ### 技术说明
@@ -120,7 +120,7 @@ A client-side mod for Minecraft **Fabric**. Every time you join a world (singlep
 ### Installation
 
 1. Install **Fabric Loader** (matching your Minecraft version): <https://fabricmc.net/use/>
-2. Put `age-lock-1.0.0.jar` into your `.minecraft/mods/` folder;
+2. Put `age-lock-1.0.1.jar` into your `.minecraft/mods/` folder;
 3. Also install **Fabric API** matching your Minecraft version: <https://modrinth.com/mod/fabric-api>
 4. Launch the game — the age verification will appear automatically when you enter a world.
 
@@ -141,7 +141,7 @@ Requires **JDK 17** and **Gradle 7.6+**:
 
 ```bash
 gradle build
-# Output: build/libs/age-lock-1.0.0.jar
+# Output: build/libs/age-lock-1.0.1.jar
 ```
 
 ### Technical Notes
