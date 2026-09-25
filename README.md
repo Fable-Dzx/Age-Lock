@@ -4,7 +4,6 @@
 **每次进入游戏强制验证年龄：未满 18 岁只能玩 5 分钟，到点游戏锁定；输入离谱年龄，触发 Steam 风格彩蛋。**
 
 ![Mod Loader](https://img.shields.io/badge/Mod%20Loader-Fabric-blueviolet?style=for-the-badge)
-![Minecraft](https://img.shields.io/badge/Minecraft-1.19.2-success?style=for-the-badge)
 ![Environment](https://img.shields.io/badge/Environment-Client-informational?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
@@ -16,7 +15,7 @@
 
 ## 中文
 
-一个为 Minecraft **Fabric 1.19.2** 制作的纯客户端模组。每次加入世界（单人 / 多人）都会强制弹出年龄验证界面，不可用 ESC 或快捷键跳过。
+一个为 Minecraft **Fabric** 制作的纯客户端模组。每次加入世界（单人 / 多人）都会强制弹出年龄验证界面，不可用 ESC 或快捷键跳过。支持的 Minecraft 版本请查看 GitHub Releases。
 
 ### 功能特性
 
@@ -47,9 +46,9 @@
 
 ### 安装
 
-1. 安装 **Fabric Loader**（1.19.2）：<https://fabricmc.net/use/>
+1. 安装 **Fabric Loader**（与你的 Minecraft 版本对应）：<https://fabricmc.net/use/>
 2. 将 `age-lock-1.0.0.jar` 放入 `.minecraft/mods/` 文件夹；
-3. 同时放入 **Fabric API**（1.19.2 版本）：<https://modrinth.com/mod/fabric-api>
+3. 同时放入与游戏版本匹配的 **Fabric API**：<https://modrinth.com/mod/fabric-api>
 4. 启动游戏即可，进入世界后会自动弹出年龄验证。
 
 ### 配置
@@ -77,7 +76,7 @@ gradle build
 - 使用 Fabric API 事件：`ClientPlayConnectionEvents.JOIN/DISCONNECT`、`ClientTickEvents.END_CLIENT_TICK`；
 - 强制界面通过每 tick 兜底检测实现，ESC / 快捷键均无法绕过；
 - 锁定计时基于游戏 tick（20 tick/秒），单机暂停菜单中暂停计时；
-- 主包：`com.fabledzx.agelock`；开发环境使用 Yarn mappings `1.19.2+build.28`。
+- 主包：`com.fabledzx.agelock`；支持的 Minecraft 版本见 GitHub Releases。
 
 ### 许可
 
@@ -87,7 +86,7 @@ gradle build
 
 ## English
 
-A client-side mod for Minecraft **Fabric 1.19.2**. Every time you join a world (singleplayer or multiplayer), a forced age-verification screen pops up — ESC and hotkeys can't skip it.
+A client-side mod for Minecraft **Fabric**. Every time you join a world (singleplayer or multiplayer), a forced age-verification screen pops up — ESC and hotkeys can't skip it. Supported Minecraft versions are listed on GitHub Releases.
 
 ### Features
 
@@ -118,9 +117,9 @@ A client-side mod for Minecraft **Fabric 1.19.2**. Every time you join a world (
 
 ### Installation
 
-1. Install **Fabric Loader** (1.19.2): <https://fabricmc.net/use/>
+1. Install **Fabric Loader** (matching your Minecraft version): <https://fabricmc.net/use/>
 2. Put `age-lock-1.0.0.jar` into your `.minecraft/mods/` folder;
-3. Also install **Fabric API** (1.19.2): <https://modrinth.com/mod/fabric-api>
+3. Also install **Fabric API** matching your Minecraft version: <https://modrinth.com/mod/fabric-api>
 4. Launch the game — the age verification will appear automatically when you enter a world.
 
 ### Configuration
@@ -148,7 +147,7 @@ gradle build
 - Powered by Fabric API events: `ClientPlayConnectionEvents.JOIN/DISCONNECT` and `ClientTickEvents.END_CLIENT_TICK`;
 - The forced screens are re-checked every tick, so ESC and hotkeys cannot bypass them;
 - The lock timer counts game ticks (20 ticks/second) and pauses in the singleplayer pause menu;
-- Main package: `com.fabledzx.agelock`; development uses Yarn mappings `1.19.2+build.28`.
+- Main package: `com.fabledzx.agelock`; supported Minecraft versions are listed on GitHub Releases.
 
 ### License
 
